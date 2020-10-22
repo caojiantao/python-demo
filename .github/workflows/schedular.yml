@@ -1,0 +1,18 @@
+on: [push, pull_request]
+
+jobs:
+  my-job:
+    name: My job
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout actions
+        uses: actions/checkout@v1
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: parse douban
+        run: |
+          python douban.py
