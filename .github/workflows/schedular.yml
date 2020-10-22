@@ -15,4 +15,6 @@ jobs:
 
       - name: parse douban
         run: |
+          pip install requests
+          pip install beautifulsoup4
           python douban.py
