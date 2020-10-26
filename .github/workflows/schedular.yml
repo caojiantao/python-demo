@@ -1,4 +1,9 @@
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 6 * *'
 
 jobs:
   my-job:
@@ -17,4 +22,5 @@ jobs:
         run: |
           pip install requests
           pip install beautifulsoup4
-          python douban.py
+          pip install urllib3
+          python jd_dog.py
