@@ -34,6 +34,7 @@ def get_result(function_id, body=None):
 if __name__ == '__main__':
     petTown = get_result("initPetTown")
     if not petTown:
+        print("token 已失效")
         sys.exit()
     petPlaceInfoList = petTown["petPlaceInfoList"]
     if petPlaceInfoList:
