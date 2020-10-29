@@ -1,5 +1,6 @@
 import json
 import sys
+import time
 
 import requests
 import urllib3
@@ -71,3 +72,31 @@ if __name__ == '__main__':
                 get_result("getSingleShopReward", {"index": browse["index"], "version": 1, "type": 1})
                 print("领取奖励：", browse["title"])
                 get_result("getSingleShopReward", {"index": browse["index"], "version": 1, "type": 2})
+    # 三餐领福袋
+    threeMealInit = result["threeMealInit"]
+    if not threeMealInit["finished"]:
+        print("准备领取三餐福袋")
+        threeMealInitResult = get_result("getThreeMealReward")
+        print("领取三餐福袋成功：", threeMealInitResult["threeMealReward"])
+    # 每日投喂达10次
+    feedReachInit = result["feedReachInit"]
+    if not feedReachInit["finished"]:
+        print("准备循环投喂，领取10次奖励")
+        index = 1
+        sec = 5
+        while True:
+            feedPetsResult = get_result("feedPets")
+            if feedPetsResult:
+                print("第", index, "投喂成功，休眠", sec, "秒，等待下次投喂...")
+                time.sleep(sec)
+            else:
+                break
+        # 重新请求
+        result = get_result("taskInit", {"version": 2, "channel": "hd"})
+        feedReachInit = result["feedReachInit"]
+        hadFeedAmount = feedReachInit["hadFeedAmount"]
+        feedReachAmount = feedReachInit["feedReachAmount"]
+        print("已经投喂", hadFeedAmount, "，目标是", feedReachAmount)
+        if hadFeedAmount >= feedReachAmount:
+            getFeedReachRewardResult = get_result("getFeedReachReward")
+            print("领取投喂累计奖励：", getFeedReachRewardResult["reward"])
