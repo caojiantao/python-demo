@@ -10,17 +10,18 @@ jobs:
     name: My job
     runs-on: ubuntu-latest
     steps:
-      - name: checkout actions
+      - name: "拉取工程代码"
         uses: actions/checkout@v1
 
-      - name: Set up Python 3.7
+      - name: "初始化 python 环境"
         uses: actions/setup-python@v1
         with:
           python-version: 3.7
-
-      - name: parse douban
         run: |
           pip install requests
           pip install beautifulsoup4
           pip install urllib3
+
+      - name: "自动完成京东萌宠任务"
+        run: |
           python jd_dog.py
