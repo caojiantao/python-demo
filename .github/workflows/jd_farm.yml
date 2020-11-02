@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0,4,10 * * *'
+
+jobs:
+  my-job:
+    name: My job
+    runs-on: ubuntu-latest
+    steps:
+      - name: "拉取工程代码"
+        uses: actions/checkout@v1
+
+      - name: "初始化 python 环境"
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
+
+      - name: "自动完成京东果园任务"
+        run: |
+          pip install requests
+          pip install beautifulsoup4
+          pip install urllib3
+          python jd_farm.py
