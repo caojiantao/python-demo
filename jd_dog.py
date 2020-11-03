@@ -30,6 +30,7 @@ def get_result(function_id, body=None):
     response = requests.get(url, headers=headers, cookies=cookies, params=params, verify=False)
     response.encoding = "utf-8"
     content = json.loads(response.content)
+    print(content)
     return content["result"] if "result" in content.keys() else None
 
 
