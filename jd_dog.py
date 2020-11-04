@@ -63,7 +63,7 @@ if __name__ == '__main__':
         print("休眠", sec, "秒，准备领取运动奖励...")
         time.sleep(sec)
         get_result("getSportReward", {"version": 1})
-        if petSportResult["petSportStatus"] == 2:
+        if petSportResult["foodReward"] > 0:
             print("领取运动奖励：", petSportResult["foodReward"])
         else:
             break
@@ -113,6 +113,7 @@ if __name__ == '__main__':
     feedReachInit = taskList["feedReachInit"]
     if not feedReachInit["finished"]:
         print("准备循环投喂，领取累计投喂奖励")
+        time.sleep(sec)
         index = 1
         while True:
             feedPetsResult = get_result("feedPets")
@@ -129,7 +130,7 @@ if __name__ == '__main__':
         hadFeedAmount = feedReachInit["hadFeedAmount"]
         feedReachAmount = feedReachInit["feedReachAmount"]
         print("今日已经投喂", hadFeedAmount, "，目标是", feedReachAmount)
-        if hadFeedAmount >= feedReachAmount:
+        if hadFeedAmount >= feedReachAmount and not feedReachInit["finished"]:
             getFeedReachRewardResult = get_result("getFeedReachReward")
             print("领取投喂累计奖励：", getFeedReachRewardResult["reward"])
 
