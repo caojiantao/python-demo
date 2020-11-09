@@ -77,7 +77,7 @@ if __name__ == '__main__':
     signInit = taskList["signInit"]
     if not signInit["finished"]:
         getSignRewardResult = get_result("getSignReward")
-        print("领取签到奖励：", getSignRewardResult["reward"])
+        print("领取签到奖励：", getSignRewardResult["signReward"])
 
     # 去浏览
     browseList = []

@@ -102,7 +102,7 @@ if __name__ == '__main__':
     # 累计浇水奖励
     print("[累计浇水]--- start ---")
     totalWater = taskList["totalWaterTaskInit"]
-    if not totalWater["totalWaterTaskFinished"] \
+    if not totalWater["f"] \
             and totalWater["totalWaterTaskTimes"] >= totalWater["totalWaterTaskLimit"]:
         res = get_result("totalWaterTaskForFarm")
         print("领取累计浇水奖励:", res["amount"])
