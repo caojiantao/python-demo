@@ -47,7 +47,7 @@ if __name__ == '__main__':
     print("[签到]--- start ---")
     signResult = taskList["signInit"]
     if not signResult["todaySigned"]:
-        res = get_result("signForFarm")
+        res = get_result("clockInForFarm", {"type": 1, "version": 8, "channel": 2})
         print("领取签到奖励:", res["amount"])
     print("[签到]---- end ----")
 
